@@ -1,4 +1,3 @@
-/*------TESTING------*/
 $p(document).ready(function($) {
   //Fire up the Add Contact Window
   $('.aAddresses').live('click', function() {
@@ -37,7 +36,6 @@ $p(document).ready(function($) {
 	  }
   });
 });
-/**-------TESTING---------*/
 
 EmailList = function(eList){
   eList = String(eList);
