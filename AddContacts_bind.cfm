@@ -27,8 +27,8 @@
 <cfoutput>
 <cfif #url.LookThisUp# IS ''>
   <!---Bind on Load show my frequent contacts--->
-  <cfset myVar_DisplayHeader = 'my frequent contacts and wistar email lists'>
-  <cfquery name="qLookUpUsers" datasource="HKWO">
+  <cfset myVar_DisplayHeader = 'my frequent contacts and [compnay name] email lists'>
+  <cfquery name="qLookUpUsers" datasource="dSource">
     SELECT ContactEmail AS EMAIL, ContactName AS FULLNAME
     FROM AddressBook_WO
     WHERE ReqID = '#ReqID#' OR ReqID = 'Everybody'
@@ -36,10 +36,10 @@
   </cfquery>	
 <cfelse>  
   <!---Looking for Internal Users--->
-  <cfset myVar_DisplayHeader = 'Wistar Employee directory'>
-  <cfquery name="qLookUpUsers" datasource="General" maxrows="30">
+  <cfset myVar_DisplayHeader = '[Company Name] Employee directory'>
+  <cfquery name="qLookUpUsers" datasource="dSource" maxrows="30">
     SELECT FIRST_NAME+' '+LAST_NAME AS FULLNAME, EMAIL
-    FROM General.Central_Employees CE
+    FROM tblName CE
     WHERE Wistar_Flag = 'Y' AND Term_Date IS NULL AND EMAIL != ''
       AND (CE.FIRST_NAME LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="#url.LookThisUp#%" maxlength="255">
       OR CE.LAST_NAME LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="#url.LookThisUp#%" maxlength="255">
